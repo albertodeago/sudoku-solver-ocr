@@ -8,7 +8,7 @@
     </div>
     <div>
       <input type="file" @change="onFileChange"/>
-      <button @click="loadImage('/img/sudoku-perfect.png')">Load sample sudoku image</button>
+      <button @click="loadImage('/sudoku-solver-ocr/dist/img/sudoku-perfect.png')">Load sample sudoku image</button>
     </div>
     <div>
       Or you can paste the url of an image here
