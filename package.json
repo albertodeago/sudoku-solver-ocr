@@ -1,0 +1,25 @@
+{
+  "name": "sudoku-solver-ocr-experiment",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "dev": "vue-cli-service serve",
+    "build": "vue-cli-service build",
+    "test:e2e": "vue-cli-service test:e2e"
+  },
+  "dependencies": {
+    "core-js": "^3.6.4",
+    "register-service-worker": "^1.7.1",
+    "tesseract.js": "^2.1.1",
+    "vue": "^2.6.11"
+  },
+  "devDependencies": {
+    "@vue/cli-plugin-babel": "^4.3.0",
+    "@vue/cli-plugin-e2e-cypress": "^4.3.0",
+    "@vue/cli-plugin-pwa": "^4.3.0",
+    "@vue/cli-service": "^4.3.0",
+    "node-sass": "^4.12.0",
+    "sass-loader": "^8.0.2",
+    "vue-template-compiler": "^2.6.11"
+  }
+}
