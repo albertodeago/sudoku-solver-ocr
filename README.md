@@ -1,5 +1,7 @@
 # sudoku-solver-ocr-experiment
 
+[DEMO](https://albertodeago.github.io/sudoku-solver-ocr/dist/)
+
 This project was an experiment, I wanted to see if it was "possible" to create a web app with cam functionality, you point the camera towards 
 a sudoku, the app "scans" it, read the numbers and the empty cells and then it resolves it.
 
@@ -60,7 +62,7 @@ I tried also with better picture with less noise, without shadows and on focus b
 Stopped the exploration at this point.
 It was a funny experiment but I think that "reading" images is possible (with a certain reliability) only with AI tools.
 
-I removed the video capture part because it was too unreliable, you can check the app [here]()
+I removed the video capture part because it was too unreliable, you can check the app [here](https://albertodeago.github.io/sudoku-solver-ocr/dist/)
 
 
 ## build

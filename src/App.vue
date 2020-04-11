@@ -8,7 +8,7 @@
     </div>
     <div>
       <input type="file" @change="onFileChange"/>
-      <button @click="loadImage('/sudoku-solver-ocr/dist/img/sudoku-perfect.png')">Load sample sudoku image</button>
+      <button @click="loadImage('https://albertodeago.github.io/sudoku-solver-ocr/dist/img/sudoku-perfect.png')">Load sample sudoku image</button>
     </div>
     <div>
       Or you can paste the url of an image here
@@ -20,7 +20,7 @@
       <canvas ref="canvas" :width="size" :height="size"></canvas>
     </div>
     
-    <div>
+    <div v-if="image">
       <button @click="split">split</button>
     </div>
 
@@ -58,7 +58,7 @@ export default {
     imagePieces: [],
     canvasPieces: [],
     readyToSolve: false,
-    inputUrl: "https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcQ3WQRJ_VUoBELXRUBJKG-8ZLHnolxKSB2f7JRrNRmeoKrQ8Xa4&usqp=CAU"
+    inputUrl: "https://albertodeago.github.io/sudoku-solver-ocr/dist/img/sudoku-perfect.png"
 
     // video: null,
     // videoCanvas: null,
