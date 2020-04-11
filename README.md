@@ -59,3 +59,13 @@ I tried also with better picture with less noise, without shadows and on focus b
 
 Stopped the exploration at this point.
 It was a funny experiment but I think that "reading" images is possible (with a certain reliability) only with AI tools.
+
+I removed the video capture part because it was too unreliable, you can check the app [here]()
+
+
+## build
+
+Use this command to push dist to gh-pages
+```
+git subtree push --prefix dist origin gh-pages
+```
