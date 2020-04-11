@@ -14,7 +14,7 @@
 importScripts("https://storage.googleapis.com/workbox-cdn/releases/4.3.1/workbox-sw.js");
 
 importScripts(
-  "/sudoku-solver-ocr/dist/precache-manifest.ad0ebd17baf04f784a1a16071b35673e.js"
+  "/sudoku-solver-ocr/dist/precache-manifest.8a46a418b383d04637770ce0b4fc5579.js"
 );
 
 workbox.core.setCacheNameDetails({prefix: "sudoku-solver-ocr-experiment"});
