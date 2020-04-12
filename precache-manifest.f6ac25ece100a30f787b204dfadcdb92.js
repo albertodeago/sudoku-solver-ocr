@@ -1,7 +1,7 @@
 self.__precacheManifest = (self.__precacheManifest || []).concat([
   {
-    "revision": "e6c94fc1dddca46285d6",
-    "url": "/sudoku-solver-ocr/dist/css/app.5180304f.css"
+    "revision": "d9e9610b76d79fe2d3ba",
+    "url": "/sudoku-solver-ocr/dist/css/app.353f59f8.css"
   },
   {
     "revision": "e2e45fa84620c50370f2e7d443f079f4",
@@ -16,12 +16,12 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/sudoku-solver-ocr/dist/img/sudoku-perfect.png"
   },
   {
-    "revision": "a143f3c93e0708b5cb1cbba5fc4696ff",
+    "revision": "fffe2ed9a177ab54957d529027b6d808",
     "url": "/sudoku-solver-ocr/dist/index.html"
   },
   {
-    "revision": "e6c94fc1dddca46285d6",
-    "url": "/sudoku-solver-ocr/dist/js/app.cbd08bac.js"
+    "revision": "d9e9610b76d79fe2d3ba",
+    "url": "/sudoku-solver-ocr/dist/js/app.4762a96e.js"
   },
   {
     "revision": "a59bef001b82d98b6e97",
