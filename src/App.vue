@@ -1,51 +1,76 @@
 <template>
   <div id="app">
-    <!-- <video ref="video" :width="size" :height="size" @click="onVideoClick" style="border: 1px solid black"></video> -->
-    
-    <!-- <br><br> -->
-    <div>
-      Load a sudoku image. It must be the perfect square of the sudoku.
-    </div>
-    <div>
-      <input type="file" @change="onFileChange"/>
-      <button @click="loadImage('https://albertodeago.github.io/sudoku-solver-ocr/dist/img/sudoku-perfect.png')">Load sample sudoku image</button>
-    </div>
-    <div>
-      Or you can paste the url of an image here
-      <input type="text" v-model="inputUrl"/>
-      <button @click="loadImage(inputUrl)">Load</button>
-    </div>
+    <section class="section has-text-centered">
+      <div class="container">
+        <h1 class="title">
+          Sudoku OCR solver
+        </h1>
+        <p class="subtitle">
+          Experiment toy project
+        </p>
+      </div>
 
-    <div>
-      <canvas ref="canvas" :width="size" :height="size"></canvas>
-    </div>
-    
-    <div v-if="image">
-      <button @click="split">split</button>
-    </div>
+      <div class="error has-text-white has-background-danger" v-if="error">
+        {{ error }}
+      </div>
+      <!-- GET AND PRINT IMAGE step -->
+      <div class="controls margin">
+        <div class="instructions">
+          Load a sudoku image. It must be the perfect square of the sudoku.
+        </div>
+        <div>
+          <input class="input margin" type="file" @change="onFileChange"/>
+          <button class="button" :class="{'is-loading': isLoading}" @click="loadImage('https://albertodeago.github.io/sudoku-solver-ocr/dist/img/sudoku-perfect.png')">Load sample sudoku image</button>
+        </div>
+        <div class="margin">
+          Or you can paste the url of an image here
+          <input class="input margin" type="text" v-model="inputUrl"/>
+          <button class="button" :class="{'is-loading': isLoading}" @click="loadImage(inputUrl)">Load from URL</button>
+        </div>
+      </div>
+      <div class="margin">
+        <canvas ref="canvas" :width="size" :height="size"></canvas>
+      </div>
 
-    <div id="images">
+      <!-- SPLIT step -->
+      <div class="margin" v-if="image">
+        <button class="button" :class="{'is-loading': isLoading}" @click="split">split</button>
+      </div>
+      <div class="margin" id="images" v-show="imagePieces.length === 81">
+        <p>The original image is split in pieces</p>
+      </div>
 
-    </div>
+      <!-- OCR read step -->
+      <div class="margin" v-if="readyToRead">
+        <button class="button" :class="{'is-loading': isLoading}" @click="readNum">Read numbers</button>
+      </div>
+      <div class="margin" v-show="grid !== null">
+        <p class="margin">Result of OCR read</p>
+        <div v-for="(row, i) in grid" :key="i" class="row">
+          <span v-for="(cell, j) in row" :key="j" class="cell">
+            {{ cell === 0 ? "" : cell }}
+          </span>
+        </div>
+      </div>
 
-    <div v-if="readyToSolve">
-      <button @click="solve">solve</button>
-    </div>
-
-    <div id="read-result">
-
-    </div>
-
-    <div id="solution">
-
-    </div>
-
+      <!-- RESOLUTION step -->
+      <div class="margin" v-if="readyToSolve">
+        <button class="button" :class="{'is-loading': isLoading}" @click="solve">Resolve</button>
+      </div>
+      <div class="margin" v-show="solution !== null">
+        <div v-for="(row, i) in solution" :key="i" class="row">
+          <span v-for="(cell, j) in row" :key="j" class="cell">
+            {{ cell === 0 ? "" : cell }}
+          </span>
+        </div>
+      </div>
+    </section>
   </div>
 </template>
 
 <script>
-import {createWorker} from "tesseract.js"
-import {solveGrid} from "./solver"
+import { createWorker } from "tesseract.js"
+import { solveGrid } from "./solver"
 
 export default {
   name: 'App',
@@ -57,7 +82,12 @@ export default {
     worker: null,
     imagePieces: [],
     canvasPieces: [],
+    readyToRead: false,
     readyToSolve: false,
+    isLoading: false,
+    grid: null,
+    solution: null,
+    error: "",
     inputUrl: "https://albertodeago.github.io/sudoku-solver-ocr/dist/img/sudoku-perfect.png"
 
     // video: null,
@@ -76,8 +106,19 @@ export default {
     // this.video = this.$refs.video
   },
   methods: {
+    resetState() {
+      this.image = null
+      this.imagePieces = []
+      this.canvasPieces = []
+      this.readyToRead = false
+      this.readyToSolve = false
+      this.grid = null
+      this.solution = null
+      this.error = ""
+    },
 
     async loadImage(src) {
+      this.resetState()
       const image = new Image()
       image.src = src
       image.crossOrigin = "anonymous"
@@ -87,7 +128,7 @@ export default {
       }
       image.onerror = (e) => {
         console.error(e)
-        // show errore telling that something went wrong, if you inserted the url probably the server doesn't support CORS
+        this.error = "There was a problem loading the image. If you inserted the URL probably the server doesn't support CORS"
       }
     },
 
@@ -160,11 +201,20 @@ export default {
 
     async split() {
       await this.cutImage()
+      this.readyToRead = true
+    },
+
+    async readNum() {
+      this.isLoading = true
+      await this.getNumbers()
+      this.isLoading = false
       this.readyToSolve = true
     },
 
     solve() {
-      this.getNumbers()
+      let sol = [[],[],[],[],[],[],[],[],[]]
+      solveGrid(this.grid, sol)
+      this.solution = sol
     },
 
     cutImage() {
@@ -262,7 +312,6 @@ export default {
       ]
       for(let i = 0; i < this.imagePieces.length; ++i) {
         const result = await this.worker.recognize(this.imagePieces[i])
-        // console.log(result.data)
         const num = result.data.text.trim() === "" ? 0 : parseInt(result.data.text.trim())
         const line = Math.floor(i / 9)
         grid[line].push(num)
@@ -274,25 +323,47 @@ export default {
       }
       // console.log(print)
       console.log(grid)
-      solveGrid(grid)
+      this.grid = grid
     }
   }
 }
 </script>
 
 <style lang="scss">
+
 #app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
+//  text-align: center;
 }
+
 #images {
   img {
     margin-right: 4px;
     border: 1px dashed #2c3e50;
   }
 }
+
+.error {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 20px;
+  height: 50px;
+}
+
+.cell {
+  width: 33px;
+  height: 33px;
+  border: 1px dashed #2c3e50;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  margin: 4px;
+  font-size: 25px;
+  vertical-align: top;
+}
+
+.margin {
+  margin: 1em;
+}
+
 </style>

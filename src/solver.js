@@ -83,14 +83,14 @@ const isPossible = function(grid, y, x, n) {
 // console.log(isPossible(4,4,5))
 // console.log(isPossible(0,0,5))
 
-const solveGrid = function(grid) {
+const solveGrid = function(grid, sol) {
     for(let y = 0; y < 9; ++y) {
         for(let x = 0; x < 9; ++x) {
             if (grid[y][x] === 0) {
                 for(let n = 1; n < 10; ++n) {
                     if (isPossible(grid, y, x, n)) {
                         grid[y][x] = n // ok possible, let's try and move on
-                        solveGrid(grid)
+                        solveGrid(grid, sol)
                         grid[y][x] = 0 // something was not good, reset to 0 and continue(backtrace)
                     }
                 }
@@ -102,6 +102,13 @@ const solveGrid = function(grid) {
         }
     }
     printGrid(grid)
+    
+    for(let i = 0; i < 9; ++i) {
+        for(let j = 0; j < 9; ++j) {
+            sol[i][j] = grid[i][j]
+        }
+    }
+    return sol
 }
 
 // solveGrid(normalGrid)
