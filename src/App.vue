@@ -337,6 +337,8 @@ export default {
 
 #images {
   img {
+    width: 8%;
+    height: auto;
     margin-right: 4px;
     border: 1px dashed #2c3e50;
   }
@@ -350,16 +352,22 @@ export default {
   height: 50px;
 }
 
+.row {
+  display: flex;
+  flex-wrap: nowrap;
+  justify-content: center;
+}
+
 .cell {
-  width: 33px;
-  height: 33px;
   border: 1px dashed #2c3e50;
   display: inline-flex;
   align-items: center;
   justify-content: center;
   margin: 4px;
-  font-size: 25px;
+  font-size: 1.5em;
   vertical-align: top;
+  width: 1.5em;
+  height: 1.5em;
 }
 
 .margin {

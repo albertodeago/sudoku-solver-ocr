@@ -1,7 +1,7 @@
 self.__precacheManifest = (self.__precacheManifest || []).concat([
   {
-    "revision": "d9e9610b76d79fe2d3ba",
-    "url": "/sudoku-solver-ocr/dist/css/app.353f59f8.css"
+    "revision": "e8ff4baf64889be21749",
+    "url": "/sudoku-solver-ocr/dist/css/app.357e672e.css"
   },
   {
     "revision": "e2e45fa84620c50370f2e7d443f079f4",
@@ -16,16 +16,16 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/sudoku-solver-ocr/dist/img/sudoku-perfect.png"
   },
   {
-    "revision": "fffe2ed9a177ab54957d529027b6d808",
+    "revision": "b85e39265810dbffad13424c247ddba9",
     "url": "/sudoku-solver-ocr/dist/index.html"
   },
   {
-    "revision": "d9e9610b76d79fe2d3ba",
-    "url": "/sudoku-solver-ocr/dist/js/app.4762a96e.js"
+    "revision": "e8ff4baf64889be21749",
+    "url": "/sudoku-solver-ocr/dist/js/app.5bdd0dcf.js"
   },
   {
-    "revision": "a59bef001b82d98b6e97",
-    "url": "/sudoku-solver-ocr/dist/js/chunk-vendors.296d5fc6.js"
+    "revision": "e322590ee388d711263d",
+    "url": "/sudoku-solver-ocr/dist/js/chunk-vendors.4c8f7bee.js"
   },
   {
     "revision": "0df4a6c5d6bb5f91191c5624de77e9e2",
