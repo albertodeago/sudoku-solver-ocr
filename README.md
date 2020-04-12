@@ -68,7 +68,7 @@ I removed the video capture part because it was too unreliable, you can check th
 
 ## build
 
-Use this command to push dist to gh-pages
-```
-git subtree push --prefix dist origin gh-pages
-```
+ - npm install -> install dependencies
+ - npm run dev -> start app in dev mode
+ - npm run build -> build app for prod
+ - git subtree push --prefix dist origin gh-pages -> deploy demo to github pages
